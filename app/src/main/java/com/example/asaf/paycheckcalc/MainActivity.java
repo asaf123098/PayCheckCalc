@@ -1,61 +1,51 @@
 package com.example.asaf.paycheckcalc;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private int perHourRate;
+    private Dialog dialog;
+    private ArrayAdapter<String> arrayAdapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        builderSingle.setTitle("Select One Name:-");
+        createDialog();
+    }
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item);
-
+    private void createDialog()
+    {
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.rate_dialog);
+        listView = (ListView) dialog.findViewById(R.id.list_item);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item);
         for(int i = 0 ; i<=100; i++) {
             arrayAdapter.add(String.valueOf(i));
         }
-        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String strName = arrayAdapter.getItem(which);
-                AlertDialog.Builder builderInner = new AlertDialog.Builder(MainActivity.this);
-                builderInner.setMessage(strName);
-                builderInner.setTitle("Your Selected Item is");
-                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builderInner.show();
-            }
-        });
-        builderSingle.show();
+        listView.setAdapter(arrayAdapter);
+        dialog.show();
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
 }
