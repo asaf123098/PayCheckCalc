@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         createDialog();
+        listView.setOnItemClickListener(this);
     }
 
     private void createDialog()
@@ -46,6 +47,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        perHourRate = position+1;
     }
 }
