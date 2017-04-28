@@ -9,7 +9,7 @@ public class Time {
     private int hour;
     private int minutes;
 
-    public Time(int minutes, int hour)
+    public Time(int hour, int minutes)
     {
         this.minutes = minutes;
         this.hour = hour;
