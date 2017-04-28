@@ -3,16 +3,20 @@ package com.example.asaf.paycheckcalc;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class Main2Activity extends AppCompatActivity implements View.OnClickListener{
+import static com.example.asaf.paycheckcalc.R.id.list_item;
+import static com.example.asaf.paycheckcalc.R.id.startButton;
 
-    private Button addShift;
+public class Main2Activity extends AppCompatActivity {
+
     private ListView listView;
-    private AdapterView adapterView;
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +25,18 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
         listView = (ListView)findViewById(R.id.list);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        addShift =(Button)findViewById(R.id.add);
-        addShift.setOnClickListener(this);
-    }
+                if(id==startButton)
+                    Log.d("id",String.valueOf(view.getId()));
+            }
+        });
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == addShift.getId())
-        {
+        adapter = new ArrayAdapter(this,R.layout.list_item);
 
-        }
+        listView.setAdapter(adapter);
+        adapter.add(null);
     }
 }
