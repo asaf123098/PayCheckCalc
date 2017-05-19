@@ -18,4 +18,25 @@ public class Shift {
         this.finish = finish;
         this.length = new Time(finish.getMinutes()-start.getMinutes(),finish.getHour()-start.getHour());
     }
+
+    public Shift()
+    {
+
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Time getStart() {
+        return start;
+    }
+
+    public Time getFinish() {
+        return finish;
+    }
+
+    public Time getLength() {
+        return length;
+    }
 }

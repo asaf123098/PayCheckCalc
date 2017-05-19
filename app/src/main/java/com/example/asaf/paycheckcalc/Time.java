@@ -15,6 +15,9 @@ public class Time {
         this.hour = hour;
     }
 
+    public Time()
+    {}
+
     public int getMinutes()
     {
         return this.minutes;
@@ -24,4 +27,13 @@ public class Time {
     {
         return this.hour;
     }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
 }
+
