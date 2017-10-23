@@ -3,6 +3,7 @@ package com.example.asaf.paycheckcalc;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
  * Created by Asaf on 05/05/2017.
  */
 
-public class ShiftsAdapter extends ArrayAdapter <Shift> implements View.OnClickListener{
+public class ShiftsAdapter extends ArrayAdapter <Shift> implements View.OnClickListener {
 
     private Date date;
     private Time startTime;
@@ -33,40 +34,40 @@ public class ShiftsAdapter extends ArrayAdapter <Shift> implements View.OnClickL
     private TimePickerDialog startTimePickerDialog;
     private TimePickerDialog finishTimePickerDialog;
 
-    private Button startButton;
-    private Button finishButton;
+    private TextView shifts_date;
+
+    private Shift currentShift;
 
 
-    public ShiftsAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<Shift> shifts) {
+    public ShiftsAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull final ArrayList<Shift> shifts) {
         super(context, resource, shifts);
 
 
-        datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        this.datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                date = new Date (dayOfMonth,month, year);
+                date = new Date(dayOfMonth, month, year);
+                shifts_date.setText(date.ToString());
             }
-        }, 2017,5,1);
-        datePickerDialog.setTitle("When did you work?");
+        }, 2017, 5, 1);
+        this.datePickerDialog.setTitle("When did you work?");
 
-        startTimePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+        this.startTimePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                startTime = new Time(hourOfDay,minute);
-                startButton.setText(String.format("%02d:%02d", hourOfDay, minute));
+                startTime = new Time(hourOfDay, minute);
             }
-        }, 0,0,true);
-        startTimePickerDialog.setTitle("When did you start?");
+        }, 0, 0, true);
+        this.startTimePickerDialog.setTitle("When did you start?");
 
 
-        finishTimePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+        this.finishTimePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                finishTime = new Time(hourOfDay,minute);
-                finishButton.setText(String.format("%02d:%02d", hourOfDay, minute));
+                finishTime = new Time(hourOfDay, minute);
             }
-        }, 0,0,true);
-        finishTimePickerDialog.setTitle("When did you finish?");
+        }, 0, 0, true);
+        this.finishTimePickerDialog.setTitle("When did you finish?");
 
     }
 
@@ -82,44 +83,49 @@ public class ShiftsAdapter extends ArrayAdapter <Shift> implements View.OnClickL
             v = vi.inflate(R.layout.shifts_list_item, null);
         }
 
-        Shift p = getItem(position);
+        currentShift = getItem(position);
 
-        if (p != null) {
-            startButton = (Button) v.findViewById(R.id.startTime);
-            startButton.setOnClickListener(this);
-            finishButton= (Button) v.findViewById(R.id.finishTime);
-            finishButton.setOnClickListener(this);
-            TextView payment = (TextView) v.findViewById(R.id.payment);
+        if (currentShift != null) {
+            shifts_date = (TextView) v.findViewById(R.id.shifts_date);
+            shifts_date.setText(currentShift.getDate().ToString());
+            shifts_date.setOnClickListener(this);
         }
         return v;
     }
 
-    private double howManyMinutes (Time startTime, Time finishTime)
-    {
-        //calculate how many minutes are between start and finish.
-        int startInMinutes = (startTime.getHour()*60)+startTime.getMinutes();
-        int finishInMinutes = (finishTime.getHour()*60)+finishTime.getMinutes();
-        double howManyMinutes =(double) finishInMinutes-startInMinutes;
+    private String howMuchTime(Time startTime, Time finishTime) {
+        //calculate how long was the time between start and finish.
+        int startInMinutes = (startTime.getHour() * 60) + startTime.getMinutes();
+        int finishInMinutes = (finishTime.getHour() * 60) + finishTime.getMinutes();
+        double howManyMinutes = (double) finishInMinutes - startInMinutes;
+        int howManyHours = (int) howManyMinutes/60;
+        int minutes = (int) howManyMinutes - howManyHours*60;
 
-        return howManyMinutes;
+        return howManyHours + ":" + minutes;
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.startTime:
+        switch (v.getId()) {
+            /*case R.id.startTime:
             {
                 //To know which startTime button was pressed.
-                startButton = (Button)v;
+                //startButton = (Button)v;
                 startTimePickerDialog.show();
             }
             break;
             case R.id.finishTime:
             {
                 //To know which finishTime button was pressed.
-                finishButton = (Button)v;
+                //finishButton = (Button)v;
                 finishTimePickerDialog.show();
+            }
+            break;*/
+            case R.id.shifts_date: {
+
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.putExtra("Shift_pos",getPosition(currentShift));
+                getContext().startActivity(intent);
             }
             break;
         }

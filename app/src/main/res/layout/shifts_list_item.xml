@@ -4,32 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="start time"
-        android:id="@+id/startTime"
-        android:layout_margin="10dp"
-        android:layout_centerVertical="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="finish time"
-        android:id="@+id/finishTime"
-        android:layout_margin="15dp"
-        android:layout_toRightOf="@id/startTime"/>
-
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/payment"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:id="@+id/shifts_date"
         android:layout_margin="15dp"
-        android:layout_toRightOf="@id/finishTime"/>
+        android:background="#33000099"
+        android:clickable="true"/>
 
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/x"
         android:scaleType="fitCenter"
