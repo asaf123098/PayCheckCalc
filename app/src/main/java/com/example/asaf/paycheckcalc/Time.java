@@ -35,5 +35,10 @@ public class Time {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+
+    public String ToString ()
+    {
+        return (this.hour + ":" + this.minutes);
+    }
 }
 

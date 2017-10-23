@@ -43,4 +43,9 @@ public class Date {
     public void setYear(int year) {
         this.year = year;
     }
+
+    public String ToString ()
+    {
+        return (this.day + "." + this.month);
+    }
 }

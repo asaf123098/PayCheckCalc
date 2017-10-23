@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
 
-    private int perHourRate;
+    public static int perHourRate ;
     private Dialog dialog;
     private ArrayAdapter<String> arrayAdapter;
     private ListView listView;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //start the dialog to choose how much money per hour
         createDialog();
         listView.setOnItemClickListener(this);
 
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         dialog.dismiss();
 
         //base on the position of the item in the array we can tell its value.
-        perHourRate = position+1;
+
+        perHourRate = Integer.parseInt(arrayAdapter.getItem(position+1));
     }
 
     @Override

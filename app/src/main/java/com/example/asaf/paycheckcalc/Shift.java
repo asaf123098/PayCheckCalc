@@ -16,7 +16,7 @@ public class Shift {
         this.date = date;
         this.start = start;
         this.finish = finish;
-        this.length = new Time(finish.getMinutes()-start.getMinutes(),finish.getHour()-start.getHour());
+        this.length = new Time(finish.getHour()-start.getHour(),finish.getMinutes()-start.getMinutes());
     }
 
     public Shift()
@@ -38,5 +38,9 @@ public class Shift {
 
     public Time getLength() {
         return length;
+    }
+
+    public double howMuchMoney() {
+        return this.length.getHour()*MainActivity.perHourRate + ((this.length.getMinutes()/60)*MainActivity.perHourRate);
     }
 }

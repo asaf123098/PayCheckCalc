@@ -1,5 +1,6 @@
 package com.example.asaf.paycheckcalc;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,13 +9,18 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+
 public class Main2Activity extends AppCompatActivity{
 
-    private ArrayList shifts;
+    private static  ArrayList SHIFTS = new ArrayList();
     private ListView listView;
     private ShiftsAdapter adapter;
 
 
+    public static Shift getItem(int pos)
+    {
+        return (Shift) SHIFTS.get(pos);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +28,7 @@ public class Main2Activity extends AppCompatActivity{
 
         listView = (ListView)findViewById(R.id.listview);
 
-        shifts = new ArrayList();
-        adapter = new ShiftsAdapter(this, R.layout.shifts_list_item, shifts);
+        adapter = new ShiftsAdapter(this, R.layout.shifts_list_item, SHIFTS);
 
         listView.setAdapter(adapter);
     }
@@ -32,7 +37,7 @@ public class Main2Activity extends AppCompatActivity{
     {
         Shift shift = new Shift();
 
-        shifts.add(shift);
+        SHIFTS.add(shift);
         adapter.notifyDataSetChanged();
     }
 }
