@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".Shifts_Details"></activity>
+        <activity android:name=".ShiftsDetails"></activity>
     </application>
 
 </manifest>
