@@ -1,4 +1,6 @@
-package com.example.asaf.paycheckcalc;
+package com.example.asaf.paycheckcalc.Objects;
+
+import com.example.asaf.paycheckcalc.MainActivity;
 
 /**
  * Created by Asaf on 28/04/2017.
@@ -41,6 +43,6 @@ public class Shift {
     }
 
     public double howMuchMoney() {
-        return this.length.getHour()*MainActivity.perHourRate + ((this.length.getMinutes()/60)*MainActivity.perHourRate);
+        return this.length.getHour()* MainActivity.perHourRate + ((this.length.getMinutes()/60)*MainActivity.perHourRate);
     }
 }

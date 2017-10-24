@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/sum"
-    android:text="ABC"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="90dp"
-    android:textSize="60dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sum"
+        android:text="Sum: "
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:textSize="60dp"></TextView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hours"
-        android:text="ABC"
+        android:text="Hours: "
         android:layout_below="@+id/sum"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
@@ -29,8 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hours_sum"
-        android:text="ABC"
-        android:textSize="25dp"
+        android:text="Total: "
+        android:textSize="23dp"
         android:layout_below="@+id/hours"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"/>
@@ -44,7 +44,8 @@
         app:backgroundTint="#005099"
         app:fabSize="normal"
         android:src="@drawable/pencil"
-        android:layout_margin="15dp"/>
+        android:layout_margin="15dp"
+        android:onClick="editShift"/>
 
-    </RelativeLayout>
+</RelativeLayout>
 

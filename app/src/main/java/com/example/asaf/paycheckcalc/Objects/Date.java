@@ -1,4 +1,4 @@
-package com.example.asaf.paycheckcalc;
+package com.example.asaf.paycheckcalc.Objects;
 
 /**
  * Created by Asaf on 28/04/2017.
